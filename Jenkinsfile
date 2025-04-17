@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'node:20.14.0-alpine'
+                    image 'node:22.14.0-alpine'
                     reuseNode true
                 }
             }
@@ -33,6 +33,16 @@ pipeline {
                     npm test App.test.js
                 '''
             }
+        }
+        
+        stage('Build My Docker Image'){
+       
+
+        }
+
+        stage('Deploy to AWS'){
+
+
         }
     }
 }
