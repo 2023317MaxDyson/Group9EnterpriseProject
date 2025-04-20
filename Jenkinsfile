@@ -11,7 +11,7 @@ environment{
         stage('Build') {
             agent {
                 docker {
-                    image 'node:22.14.0-alpine'
+                    image 'node:20.11.0-alpine'
                     reuseNode true
                 }
             }
@@ -29,7 +29,7 @@ environment{
         stage('Test') {
             agent {
                 docker {
-                    image 'node:22.14.0-alpine'
+                    image 'node:20.11.0-alpine'
                     reuseNode true
                 }
             }
