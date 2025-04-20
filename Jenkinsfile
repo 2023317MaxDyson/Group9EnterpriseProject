@@ -79,9 +79,8 @@ environment{
             sh'''
             aws --version
             yum install jq -y
-            LATEST_TD_REVSION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition.json )
-
-
+            LATEST_TD_REVSION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition.json | jq '.taskDefinition.revision')
+            aws ecs update-service --cluster my-enterprise-project-Cluster_Prod --service my-enterprise-project-Service-Prod --task definition MyNewReactApp-TaskDefinition-Prod:$LATEST_TD_REVSION
             '''
           }
 
