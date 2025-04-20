@@ -56,7 +56,7 @@ environment{
             }
         }
         steps{
-        withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')])
+        withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
 
          sh '''
             amazon-linux-extras install docker
@@ -65,6 +65,8 @@ environment{
             docker push $AWS_DOCKER_REGISTRY/$APP_NAME:latest
          '''
          }
+
+        }
 
         }
 
@@ -79,7 +81,7 @@ environment{
         }
          
           steps{
-            withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID' )])
+            withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID' )]) {
 
             sh'''
             aws --version
@@ -87,6 +89,8 @@ environment{
             LATEST_TD_REVSION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition.json | jq '.taskDefinition.revision')
             aws ecs update-service --cluster my-enterprise-project-Cluster_Prod --service my-enterprise-project-Service-Prod --task definition MyNewReactApp-TaskDefinition-Prod:$LATEST_TD_REVSION
             '''
+            }
+
           }
 
         }
