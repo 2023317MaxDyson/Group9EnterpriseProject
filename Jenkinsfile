@@ -60,7 +60,7 @@ environment{
 
          sh '''
                  amazon-linux-extras install docker 
-                 docker build -t $AWS_DOCKER_RESGISTRY/$APP_NAME .
+                 docker build -t $AWS_DOCKER_RESGISTRY/$APP_NAME:latest .
                  aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_DOCKER_RESGISTRY
                  docker push $AWS_DOCKER_RESGISTRY/$APP_NAME:latest
          '''
