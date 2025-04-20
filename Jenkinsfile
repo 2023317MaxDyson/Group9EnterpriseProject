@@ -16,7 +16,7 @@ environment{
 
             agent {
                 docker {
-                    image 'node:20.11.0-alpine'
+                    image 'node:20.11.0-bullseye'
                     reuseNode true
                 }
             }
@@ -25,7 +25,7 @@ environment{
                     ls -la
                     node --version
                     npm --version
-                    npm install -g npm@11.3.0
+                    npm install 
                     npm run build
                     ls -la
                 '''
@@ -34,7 +34,7 @@ environment{
         stage('Test') {
             agent {
                 docker {
-                    image 'node:20.11.0-alpine'
+                    image 'node:20.11.0-bullseye'
                     reuseNode true
                 }
             }
