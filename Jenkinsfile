@@ -59,11 +59,12 @@ environment{
         withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
 
          sh '''
-            amazon-linux-extras install docker
-            yum install -y git
-            docker build -t $AWS_DOCKER_REGISTRY/$APP_NAME . 
-            aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_DOCKER_REGISTRY
-            docker push $AWS_DOCKER_REGISTRY/$APP_NAME:latest
+                amazon-linux-extras enable docker
+                amazon-linux-extras install docker -y
+                 yum install -y git
+                 docker build -t $AWS_DOCKER_RESGISTRY/$APP_NAME:latest .
+                 aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_DOCKER_RESGISTRY
+                 docker push $AWS_DOCKER_RESGISTRY/$APP_NAME:latest
          '''
          }
 
