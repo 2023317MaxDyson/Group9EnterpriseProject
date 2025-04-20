@@ -56,7 +56,7 @@ environment{
             }
         }
         steps{
-        withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+        withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
 
          sh '''
                  amazon-linux-extras install docker 
@@ -81,7 +81,7 @@ environment{
         }
          
           steps{
-            withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID' )]) {
+            withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID' )]) {
 
             sh'''
                 aws --version
