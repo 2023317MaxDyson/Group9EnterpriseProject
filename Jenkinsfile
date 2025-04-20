@@ -9,7 +9,7 @@ environment{
 
     stages {
         stage('Build') {
-            
+
             environment{
                 CI = 'false'
             }
@@ -25,7 +25,7 @@ environment{
                     ls -la
                     node --version
                     npm --version
-                    npm install
+                    npm install -g npm@11.3.0
                     npm run build
                     ls -la
                 '''
