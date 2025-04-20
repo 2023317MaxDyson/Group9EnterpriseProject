@@ -59,11 +59,9 @@ environment{
         withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
 
          sh '''
-                amazon-linux-extras enable docker
-                amazon-linux-extras install docker -y
-                 yum install -y git
-                 docker build -t $AWS_DOCKER_RESGISTRY/$APP_NAME:latest .
-                 aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_DOCKER_RESGISTRY
+                 amazon-linux-extras install docker 
+                 docker build -t $AWS_DOCKER_RESGISTRY/$APP_NAME .
+                 aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_DOCKER_RESGISTRY
                  docker push $AWS_DOCKER_RESGISTRY/$APP_NAME:latest
          '''
          }
@@ -86,11 +84,12 @@ environment{
             withCredentials([usernamePassword(credentialsId: 'myNewUser', passwordVariable: 'AWS=SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID' )]) {
 
             sh'''
-            aws --version
-            yum install jq -y
-            LATEST_TD_REVSION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition.json | jq '.taskDefinition.revision')
-            aws ecs update-service --cluster my-enterprise-project-Cluster_Prod --service my-enterprise-project-Service-Prod --task definition MyNewReactApp-TaskDefinition-Prod:$LATEST_TD_REVSION
+                aws --version
+                yum install jq -y
+                LATEST_TD_REVSION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition.json | jq '.taskDefinition.revision')
+                aws ecs update-service --cluster my-enterprise-project-Cluster_Prod --service my-enterprise-project-Service-Prod --task definition MyNewReactApp-TaskDefinition-Prod:$LATEST_TD_REVSION
             '''
+
             }
 
           }
